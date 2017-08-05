@@ -2,56 +2,55 @@
 
 const http = require('http')
 const fs = require('fs')
-// Importujemy connect
 const connect = require('connect')
 
 const port = process.env.PORT || 3000
 
-// Tworzymy nową aplikację (serwer) z użyciem connect
 const app = connect()
 
-app.use((req, res) => {
-  const { url } = req
-
-  console.log(url)
-
-  if (url === '/' || url === '/index.html') {
-    serveFile('index.html', 'text/html', res)
-  } else if (url === '/main.js') {
-    serveFile('main.js', 'application/javascript', res)
-  } else if (url === '/styles.css') {
-    serveFile('styles.css', 'text/css', res)
-  } else if (url === '/api/activities') {
-    res.writeHead(200, {
-      'Content-Type': 'application/json'
-    })
-    res.end(JSON.stringify([
-      {
-        id: 3,
-        alt: 'Bicycle',
-        name: 'Cycling',
-        timeSpent: 120
-      },
-      {
-        id: 7,
-        alt: 'Swimmer',
-        name: 'Swimming',
-        timeSpent: 60
-      },
-      {
-        id: 9,
-        alt: 'Runners',
-        name: 'Running',
-        timeSpent: 30
-      }
-    ]))
-  } else {
-    res.writeHead(404)
-    res.end('404: Not Found')
-  }
+// Każdy plik rejestrujemy osobno, connect zajmie się za nas routingiem*.
+app.use('/index.html', (req, res) => serveFile('index.html', 'text/html', res))
+app.use('/main.js', (req, res) => serveFile('main.js', 'application/javascript', res))
+app.use('/styles.css', (req, res) => serveFile('styles.css', 'text/css', res))
+app.use('/api/activities', (req, res) => {
+  res.writeHead(200, {
+    'Content-Type': 'application/json'
+  })
+  res.end(JSON.stringify([
+    {
+      id: 3,
+      alt: 'Bicycle',
+      name: 'Cycling',
+      timeSpent: 120
+    },
+    {
+      id: 7,
+      alt: 'Swimmer',
+      name: 'Swimming',
+      timeSpent: 60
+    },
+    {
+      id: 9,
+      alt: 'Runners',
+      name: 'Running',
+      timeSpent: 30
+    }
+  ]))
 })
 
-// A następnie przekazujemy aplikację i startujemy serwer.
+// 11/ Fallback do index.html musimy dać na samym końcu,
+// -- Routy muszą się tylko zaczynać od podanej ścieżki.
+app.use('/', (req, res, next) => {
+  // 3/ W Przypadku kiedy faktycznie obsługujem główny URL zwróć index.
+  if (req.url === '/') {
+    serveFile('index.html', 'text/html', res)
+    return
+  }
+
+  // W przeciwnym przypadku wywołamy po prostu `next()` aby pozwolić na domyślne zachowanie.
+  next()
+})
+
 http.createServer(app).listen(port, () => {
   console.log(`Listening on :${port}`)
 })
