@@ -16,14 +16,10 @@ const server = http.createServer((req, res) => {
     serveFile('main.js', 'application/javascript', res)
   } else if (url === '/styles.css') {
     serveFile('styles.css', 'text/css', res)
-  // Obsługujemy endpoint /api/activities
   } else if (url === '/api/activities') {
-    // 3/ Wysyłamy odpowiedni Content-Type...
     res.writeHead(200, {
       'Content-Type': 'application/json'
     })
-
-    // 20/ ...i przesyłamy zserializowane dane
     res.end(JSON.stringify([
       {
         id: 3,
@@ -54,18 +50,34 @@ server.listen(port, () => {
   console.log(`Listening on :${port}`)
 })
 
+// Tworzymy pomocniczą funkcję, ktora zwróci Promise na zawartość pliku
+function readFile (file) {
+  // Tworzymy nowy Promise (Revealing Constructor Pattern)
+  return new Promise((resolve, reject) => {
+    // 3/ W Przypadku błędu odrzucamy Promise
+    fs.readFile(`./static/${file}`, 'utf8', (err, content) => {
+      if (err) {
+        reject(err)
+      } else {
+        // ...a jak wszystko jest ok to zwracamy wartość
+        resolve(content)
+      }
+    })
+  })
+}
+
 function serveFile (file, mime, res) {
-  fs.readFile(`./static/${file}`, 'utf8', (err, content) => {
-    if (err) {
+  // 12/ Funkcja serwująca plik też nam się upraszcza.
+  readFile(file)
+    .then(content => {
+      res.writeHead(200, {
+        'Content-Type': mime
+      })
+      res.end(content)
+    })
+    .catch(err => {
       console.error(err)
       res.writeHead(500)
       res.end(`Internal Error`)
-      return
-    }
-
-    res.writeHead(200, {
-      'Content-Type': mime
     })
-    res.end(content)
-  })
 }
