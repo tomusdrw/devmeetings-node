@@ -1,0 +1,5 @@
+# Instalujemy express
+$ npm i --save express
+
+# Możemy też pozbyć się connect
+$ npm remove --save connect
