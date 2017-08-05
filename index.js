@@ -3,8 +3,9 @@
 const http = require('http')
 const fs = require('fs')
 const connect = require('connect')
-// Importujemy morgan
 const morgan = require('morgan')
+// Importujemy paczkę...
+const serveStatic = require('serve-static')
 
 const port = process.env.PORT || 3000
 
@@ -22,12 +23,11 @@ app.use((req, res, next) => {
   next()
 })
 
-// Dodajemy middleware morgan
 app.use(morgan('dev'))
+// ...i rejestrujemy middleware
+app.use(serveStatic('static'))
 
-app.use('/index.html', (req, res) => serveFile('index.html', 'text/html', res))
-app.use('/main.js', (req, res) => serveFile('main.js', 'application/javascript', res))
-app.use('/styles.css', (req, res) => serveFile('styles.css', 'text/css', res))
+// Jedyną routą w naszym serwerze zostaje lista aktywności.
 app.use('/api/activities', (req, res) => {
   res.writeHead(200, {
     'Content-Type': 'application/json'
@@ -54,41 +54,6 @@ app.use('/api/activities', (req, res) => {
   ]))
 })
 
-app.use('/', (req, res, next) => {
-  if (req.url === '/') {
-    serveFile('index.html', 'text/html', res)
-    return
-  }
-
-  next()
-})
-
 http.createServer(app).listen(port, () => {
   console.log(`Listening on :${port}`)
 })
-
-function readFile (file) {
-  return new Promise((resolve, reject) => {
-    fs.readFile(`./static/${file}`, 'utf8', (err, content) => {
-      if (err) {
-        reject(err)
-      } else {
-        resolve(content)
-      }
-    })
-  })
-}
-
-async function serveFile (file, mime, res) {
-  try {
-    const content = await readFile(file)
-    res.writeHead(200, {
-      'Content-Type': mime
-    })
-    res.end(content)
-  } catch (err) {
-    console.error(err)
-    res.writeHead(500)
-    res.end(`Internal Error`)
-  }
-}
