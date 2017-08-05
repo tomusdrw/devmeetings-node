@@ -1,0 +1,2 @@
+# Dodajemy nową zależność: connect
+$ npm i --save connect
