@@ -1,11 +1,8 @@
-// Zamiast connect importujemy `express`
 const express = require('express')
 const morgan = require('morgan')
-const serveStatic = require('serve-static')
 const errorhandler = require('errorhandler')
 const config = require('config')
 
-// API express jest zgodne z connect, więc nie musimy zmieniać nic w aplikacji.
 const app = express()
 
 if (config.get('env') !== 'production') {
@@ -25,13 +22,12 @@ app.use((req, res, next) => {
 })
 
 app.use(morgan('dev'))
-app.use(serveStatic('static'))
+// Zastępujemy serve-static przez express.static
+app.use(express.static('static'))
 
-app.use('/api/activities', (req, res) => {
-  res.writeHead(200, {
-    'Content-Type': 'application/json'
-  })
-  res.end(JSON.stringify([
+// 22/ Zamieniamy endpoint na get i używamy uproszczonego zwracania responsów.
+app.get('/api/activities', (req, res) => {
+  res.json([
     {
       id: 3,
       alt: 'Bicycle',
@@ -50,20 +46,18 @@ app.use('/api/activities', (req, res) => {
       name: 'Running',
       timeSpent: 30
     }
-  ]))
+  ])
 })
 
-app.use('/version', (req, res) => {
-  res.writeHead(200, {
-    'Content-Type': 'application/json'
-  })
-  res.end(JSON.stringify({
+app.get('/version', (req, res) => {
+  res.json({
     version: require('./package.json').version,
     env: config.get('env')
-  }))
+  })
 })
 
-app.use('/crash', () => {
+// 3/ Ustawiamy crash tylko na request POST
+app.post('/crash', () => {
   throw new Error('Crashing!')
 })
 
