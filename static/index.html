@@ -12,5 +12,19 @@
     <h1>Your activities</h1>
 
     <div class="activities"></div>
+
+    <form action="/addActivity" method="POST">
+      <h3>Add activity</h3>
+      <label>
+        Activity name
+        <input type="text" name="name">
+      </label>
+      <label>
+        Image id
+        <input type="number" name="id">
+      </label>
+
+      <button>Add</button>
+    </form>
   </body>
 </html>

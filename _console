@@ -1,5 +1,6 @@
 $ npm i --save express
 $ npm remove --save connect
-
-# Pozbywamy się serve-static
 $ npm remove --save serve-static
+
+# Potrzebujemy body-parser aby móc odczytać przesyłane do serwera dane.
+$ npm i --save body-parser

@@ -32,4 +32,20 @@ describe('Server', () => {
         expect(response.body.length).to.equal(3)
       })
   })
+
+  // 14/ Przetestujmy nowe zachowanie serwera.
+  it('should add new activity via POST /addActivity', () => {
+    return request(app)
+      .post('/addActivity')
+      .send('name=Test')
+      .send('id=6')
+      .expect(303)
+      .then(res => {
+        return request(app)
+          .get('/api/activities')
+          .then(res => {
+            expect(res.body.length).to.equal(4)
+          })
+      })
+  })
 })
