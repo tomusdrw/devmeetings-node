@@ -1,15 +1,11 @@
 $ npm init -f
 $ npm start
-
-# Uruchamiamy wrk
 $ wrk       \
-# Czas testu 5 sekund
   -d 5s     \
-# Uruchomimy 8 wątków
   -t 8      \
-# A każdy z nich będzie utrzymywał 1k połączeń
   -c 1000   \
-# Dodatkowo wyświetlimy dystrybucje latency
   --latency \
-# I podajemy adres naszego serwera
   http://localhost:3000/
+
+# Możemy odpytać serwer za pomocą http (httpie)
+$ http http://localhost:3000/api/activities

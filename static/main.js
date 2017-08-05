@@ -57,28 +57,15 @@ class View {
   }
 }
 
-const model = new Model([
-  {
-    id: 3,
-    alt: 'Bicycle',
-    name: 'Cycling',
-    timeSpent: 120
-  },
-  {
-    id: 7,
-    alt: 'Swimmer',
-    name: 'Swimming',
-    timeSpent: 60
-  },
-  {
-    id: 9,
-    alt: 'Runners',
-    name: 'Running',
-    timeSpent: 30
-  }
-])
-const view = new View(model)
-const $activities = document.querySelector('.activities')
-view.render().map($activity => {
-  $activities.appendChild($activity)
-})
+// 6/ Po stronie klienta pobieramy dane za pomocą fetch.
+window.fetch('api/activities')
+  // Fetch zwraca `Promise`, na którym wywołujemy `then`
+  .then(res => res.json())
+  .then(activities => {
+    const model = new Model(activities)
+    const view = new View(model)
+    const $activities = document.querySelector('.activities')
+    view.render().map($activity => {
+      $activities.appendChild($activity)
+    })
+  })
