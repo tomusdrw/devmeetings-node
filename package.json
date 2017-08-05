@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "connect": "^3.6.3"
+    "connect": "^3.6.3",
+    "morgan": "^1.8.2"
   }
 }

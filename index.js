@@ -3,26 +3,27 @@
 const http = require('http')
 const fs = require('fs')
 const connect = require('connect')
+// Importujemy morgan
+const morgan = require('morgan')
 
 const port = process.env.PORT || 3000
 
 const app = connect()
 
-// 14/ Middleware wygląda następująco:
 app.use((req, res, next) => {
-  // Zapisujemy czas podczas wejścia (jest pierwszy w kolejności)
   const start = process.hrtime()
 
-  // Wołamy pozostałe middlewary
-  next()
+  res.on('finish', () => {
+    const time = process.hrtime(start)
+    const ms = time[0] * 1e3 + time[1] * 1e-6
+    console.log(`${ms} ms`)
+  })
 
-  // 5/ Kiedy wszystko zostanie przetworzone wypisujemy czas.
-  // -- res.on('finish', () =>{
-  const time = process.hrtime(start)
-  const ms = time[0] * 1e3 + time[1] * 1e-6
-  console.log(`${ms} ms`)
-  // -- })
+  next()
 })
+
+// Dodajemy middleware morgan
+app.use(morgan('dev'))
 
 app.use('/index.html', (req, res) => serveFile('index.html', 'text/html', res))
 app.use('/main.js', (req, res) => serveFile('main.js', 'application/javascript', res))

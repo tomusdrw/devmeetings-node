@@ -1,2 +1,4 @@
-# Dodajemy nową zależność: connect
 $ npm i --save connect
+
+# Dodajemy morgan
+$ npm i --save morgan
