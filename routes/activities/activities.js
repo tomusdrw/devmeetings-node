@@ -1,24 +1,12 @@
 const Router = require('express').Router
 const bodyParser = require('body-parser')
 const boom = require('boom')
-const Joi = require('joi')
 const celebrate = require('celebrate')
 
 const model = require('../../models/activities')
 const { validateRes } = require('../utils')
-
-const activitySchema = Joi.object().keys({
-  name: Joi.string().alphanum().trim().min(3).max(30).required(),
-  alt: Joi.string().token().trim().min(3).max(30).required(),
-  timeSpent: Joi.number().greater(0).default(0)
-})
-
-// 5/ Definiujemy schemę dla parametrów
-const listingSchema = Joi.object().keys({
-  offset: Joi.number().positive().default(0),
-  limit: Joi.number().positive().default(10),
-  fields: Joi.array().items(Joi.string().valid(activitySchema._inner.children.map(c => c.key))).default(false)
-})
+// Wydzielamy schemy do osobnego modułu
+const schemas = require('../../schemas')
 
 class Activities {
   constructor (model) {
@@ -28,17 +16,16 @@ class Activities {
     this.router.route('/')
       .post(
         bodyParser.json(),
-        celebrate({ body: activitySchema }),
+        celebrate({ body: schemas.activity }),
         (req, res, next) => this.new(req, res).catch(next)
       )
       .get(
-        // Dodajemy walidację przekazanego query
-        celebrate({ query: listingSchema }),
+        celebrate({ query: schemas.listing }),
         (req, res, next) => this.list(req, res).catch(next)
       )
 
     this.router.route('/:id')
-      .get(validateRes(activitySchema), (req, res, next) => this.get(req, res).catch(next))
+      .get(validateRes(schemas.activity), (req, res, next) => this.get(req, res).catch(next))
       .patch(bodyParser.json(), (req, res, next) => this.update(req, res).catch(next))
       .delete((req, res, next) => this.delete(req, res).catch(next))
   }
