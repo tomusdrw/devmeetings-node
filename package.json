@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon --delay 1 ./index.js",
     "lint": "standard",
-    "test": "mocha ."
+    "__": "Poprawiamy polecenie odpalające testy.",
+    "test": "mocha --recursive routes index.test.js"
   },
   "keywords": [],
   "author": "",
