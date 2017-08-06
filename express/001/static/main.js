@@ -57,7 +57,7 @@ class View {
   }
 }
 
-window.fetch('/api/activities')
+window.fetch('api/activities')
   .then(res => res.json())
   .then(activities => {
     const model = new Model(activities)

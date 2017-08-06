@@ -1,0 +1,37 @@
+
+    <!DOCTYPE html>
+    <html xp-run-server-url="https://xpla.org" xp-presence-url="wss://presence.xpla.org">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Sprint 9</title>
+        <script src="https://xpla.org/static/js/slide_loader.3.0.0.js"></script>
+      </head>
+
+      <body class="xp-slide">
+        <div class="xp-row center" style="height: 100%">
+          <h1>Sprint 9</h1>
+          <xp-tasks time="75">
+  <ol>
+    <li class="xp-basic">
+      Generuj tokeny JWT jeżeli dane logowania są poprawne (user + hasło). Przechowuj bazę użytkowników w pamięci i nie przejmuj się haszowaniem hasła. <br>
+      Dodaj logowanie do frontendu.
+    </li>
+    <li class="xp-basic">
+      Pozwól na dodawanie, edycję i usuwanie produktów tylko zautentykowanym użytkownikom.
+    </li>
+    <li class="xp-advanced">
+      Stwórz endpoint do odnawiania tokenów jeżeli user dysponuje ważnym jeszcze tokenem.
+      Stary token powinien stać się niepoprawny.
+    </li>
+    <li class="xp-extra">
+      Jak rozwiązać sytuację, w której user ma prawo usuwać produkty, ale tylko poniżej jakiejś ceny (admin może usuwać wszystkie)?
+      Zaimplementuj proponowane rozwiązanie.
+    </li>
+  </ol>
+</xp-tasks>
+
+        </div>
+      </body>
+    </html>
+  

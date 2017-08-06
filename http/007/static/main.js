@@ -58,7 +58,7 @@ class View {
 }
 
 // 6/ Po stronie klienta pobieramy dane za pomocą fetch.
-window.fetch('/api/activities')
+window.fetch('api/activities')
   // Fetch zwraca `Promise`, na którym wywołujemy `then`
   .then(res => res.json())
   .then(activities => {

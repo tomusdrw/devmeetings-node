@@ -61,7 +61,7 @@ function refresh () {
   const $activities = document.querySelector('.activities')
   $activities.innerHTML = ''
 
-  window.fetch('/v1/api/activities')
+  window.fetch('v1/api/activities')
     .then(res => res.json())
     .then(activities => {
       const model = new Model(activities)
