@@ -5,8 +5,9 @@ const Joi = require('joi')
 const celebrate = require('celebrate')
 
 const model = require('../../models/activities')
+// Importujemy nasz middleware
+const { validateRes } = require('../utils')
 
-// 5/ Schema pozostaje niezmieniona
 const activitySchema = Joi.object().keys({
   name: Joi.string().alphanum().min(3).max(30).required(),
   alt: Joi.string().token().min(3).max(30).required(),
@@ -19,7 +20,6 @@ class Activities {
 
     this.router = Router()
     this.router.route('/')
-      // 5/ Walidację wpinamy jako middleware
       .post(
         bodyParser.json(),
         celebrate({ body: activitySchema }),
@@ -28,7 +28,8 @@ class Activities {
       .get((req, res, next) => this.list(req, res).catch(next))
 
     this.router.route('/:id')
-      .get((req, res, next) => this.get(req, res).catch(next))
+      // Dodajemy go do pobierania pojedynczej aktywności
+      .get(validateRes(activitySchema), (req, res, next) => this.get(req, res).catch(next))
       .patch(bodyParser.json(), (req, res, next) => this.update(req, res).catch(next))
       .delete((req, res, next) => this.delete(req, res).catch(next))
   }
