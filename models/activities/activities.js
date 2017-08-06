@@ -3,8 +3,23 @@ class Activities {
     this._data = data
   }
 
-  async activities () {
-    return this._data.slice(0)
+  async length () {
+    return this._data.length
+  }
+
+  async activities (limit, offset, fields) {
+    return this._data
+      .slice(offset, offset + limit)
+      .map(activity => {
+        if (!fields) {
+          return activity
+        }
+        const obj = {}
+        fields.map(key => {
+          obj[key] = activity[key]
+        })
+        return obj
+      })
   }
 
   async getActivity (id) {
