@@ -1,5 +1,5 @@
 const Joi = require('joi')
-const boom = require('boom')
+const jwt = require('express-jwt')
 
 function validateRes (schema) {
   return (req, res, next) => {
@@ -24,13 +24,11 @@ function validateRes (schema) {
 }
 
 function requireAuth () {
-  return (req, res, next) => {
-    if (req.header('X-Secret') === 'secretcode') {
-      return next()
-    }
-
-    throw boom.unauthorized('You are not authorized to access this endpoint.')
-  }
+  // 3/ Middleware do authoryzacji będzie teraz wymagał tokena JWT
+  return jwt({
+    // Secret używany jest do weryfikacji sygnatury
+    secret: 'secret'
+  })
 }
 
 module.exports = { validateRes, requireAuth }

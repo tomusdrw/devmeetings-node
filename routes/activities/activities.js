@@ -14,7 +14,6 @@ class Activities {
     this.router = Router()
     this.router.route('/')
       .post(
-        // Wymagamy autoryzacji aby dodać nową aktywność
         requireAuth(),
         bodyParser.json(),
         celebrate({ body: schemas.activity }),
@@ -27,7 +26,6 @@ class Activities {
 
     this.router.route('/:id')
       .get(validateRes(schemas.activity), (req, res, next) => this.get(req, res).catch(next))
-      // 9/ Oraz w przypadku edycji czy usuwania
       .patch(
         requireAuth(),
         bodyParser.json(),

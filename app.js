@@ -1,3 +1,4 @@
+const boom = require('boom')
 const celebrate = require('celebrate')
 const config = require('config')
 const errorhandler = require('errorhandler')
@@ -12,6 +13,15 @@ app.use(morgan('dev'))
 app.use(express.static('static'))
 
 app.use(routes)
+
+// 7/ Dodajemy middleware do ładnego formatowania błedów
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    next(boom.unauthorized(err.message))
+  } else {
+    next(err)
+  }
+})
 
 app.use((err, req, res, next) => {
   if (res.headersSent) {
