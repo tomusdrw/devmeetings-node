@@ -45,21 +45,94 @@ const activities = [
   }
 ]
 
-// 3/ Potrafimy już zareprezentować listę aktywności
-app.get('/api/activities', (req, res) => {
+// 17/ Tworzenie nowej aktywności
+app.post(
+  '/v1/api/activities',
+  bodyParser.json(),
+  (req, res) => {
+    const { name, alt } = req.body
+    const id = activities.length + 1
+    const timeSpent = 0
+    const activity = { id, name, alt, timeSpent }
+
+    activities.push(activity)
+
+    res
+      .status(201)
+      .set('Content-Location', `/v1/api/activities/${id}`)
+      .json(activity)
+  }
+)
+// 3/ Lista aktywności
+app.get('/v1/api/activities', (req, res) => {
   res.json(activities)
 })
 
-// 5/ W jaki sposób stworzyć API dla pozostałych operacji (dodaj, edytuj usuń)?
-app.put('/api/activities/add', unimplemented)
-app.get('/api/activities/:id', unimplemented)
-app.post('/api/activities/:id/edit', unimplemented)
-app.post('/api/activities/:id/delete', unimplemented)
-app.get('/api/activities/page/:page', unimplemented)
+// 16/ Pobieranie pojedynczej aktywności
+app.get('/v1/api/activities/:id', (req, res) => {
+  const id = parseInt(req.params.id, 10)
+  const activity = activities.find(x => x.id === id)
+  if (!activity) {
+    res
+      .status(404)
+      .json({
+        message: 'The activity does not exist.'
+      })
+    return
+  }
 
-function unimplemented () {
-  throw new Error('Unimplemented!')
-}
+  res
+    .status(200)
+    .json(activity)
+})
+
+// 17/ Usunięcie aktywności
+app.delete('/v1/api/activities/:id', (req, res) => {
+  const id = parseInt(req.params.id, 10)
+  const idx = activities.findIndex(x => x.id === id)
+  if (!idx) {
+    res
+      .status(404)
+      .json({
+        message: 'The activity does not exist.'
+      })
+    return
+  }
+
+  activities.splice(idx, 1)
+
+  res
+    .status(204)
+    .end()
+})
+
+// 25/ Edycja aktywności (częściowa)
+app.patch(
+  '/v1/api/activities/:id',
+  bodyParser.json(),
+  (req, res) => {
+    const id = parseInt(req.params.id, 10)
+    const activity = activities.find(x => x.id === id)
+    if (!activity) {
+      res
+        .status(404)
+        .json({
+          message: 'The activity does not exist.'
+        })
+      return
+    }
+
+    const { name, alt, timeSpent } = req.body
+    activity.name = name || activity.name
+    activity.alt = alt || activity.alt
+    activity.timeSpent = timeSpent || activity.timeSpent
+
+    res
+      .status(200)
+      .set('Content-Location', `/v1/api/activities/${id}`)
+      .json(activity)
+  }
+)
 
 app.post(
   '/addActivity',

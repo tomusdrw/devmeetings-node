@@ -57,7 +57,8 @@ class View {
   }
 }
 
-window.fetch('api/activities')
+window.fetch('v1/api/activities')
+>>>>>>> e3bb437... RESTful API design [Design]
   .then(res => res.json())
   .then(activities => {
     const model = new Model(activities)
