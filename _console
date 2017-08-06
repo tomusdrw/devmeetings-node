@@ -1,2 +1,3 @@
-# Dodajemy joi do projektu
 $ npm i --save joi
+# instalujemy celebrate
+$ npm i --save celebrate

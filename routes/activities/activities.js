@@ -2,10 +2,11 @@ const Router = require('express').Router
 const bodyParser = require('body-parser')
 const boom = require('boom')
 const Joi = require('joi')
+const celebrate = require('celebrate')
 
 const model = require('../../models/activities')
 
-// 5/ Definiujemy schemat pojedynczego obiektu
+// 5/ Schema pozostaje niezmieniona
 const activitySchema = Joi.object().keys({
   name: Joi.string().alphanum().min(3).max(30).required(),
   alt: Joi.string().token().min(3).max(30).required(),
@@ -18,7 +19,12 @@ class Activities {
 
     this.router = Router()
     this.router.route('/')
-      .post(bodyParser.json(), (req, res, next) => this.new(req, res).catch(next))
+      // 5/ Walidację wpinamy jako middleware
+      .post(
+        bodyParser.json(),
+        celebrate({ body: activitySchema }),
+        (req, res, next) => this.new(req, res).catch(next)
+      )
       .get((req, res, next) => this.list(req, res).catch(next))
 
     this.router.route('/:id')
@@ -28,8 +34,7 @@ class Activities {
   }
 
   async new (req, res) {
-    // A tutaj pobieramy obiekt i go walidujemy
-    const { name, alt } = Joi.attempt(req.body, activitySchema)
+    const { name, alt } = req.body
     const activity = await this._model.newActivity(name, alt)
 
     res
