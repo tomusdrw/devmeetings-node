@@ -1,5 +1,6 @@
 const Joi = require('joi')
 const jwt = require('express-jwt')
+const config = require('config')
 
 function validateRes (schema) {
   return (req, res, next) => {
@@ -27,7 +28,7 @@ function requireAuth () {
   // 3/ Middleware do authoryzacji będzie teraz wymagał tokena JWT
   return jwt({
     // Secret używany jest do weryfikacji sygnatury
-    secret: 'secret'
+    secret: config.get('secret')
   })
 }
 

@@ -1,14 +1,4 @@
 <details>
-  <p>Wiemy, że ktoś ma dostęp do zasobu (jest zautoryzowany), ale nie wiemy kim jest dana osoba.</p>
-  <p>W praktyce będzie nas interesowało kto próbuje modyfikować daną kolekcję czy element.</p>
-  <p>
-    Możemy skorzystać z:
-    <ul>
-      <li><strong>Sesji</strong> - zapamiętać w cookie identyfikator sesji, a następnie sprawdzać jaki użytkownik się pod nią kryje.</li>
-      <li><strong>Tokenów</strong> - do każdego requestu dołączamy token, który pozwala na sprawdzenie w bazie użytkownika, dla którego został wydany.</li>
-    </ul>
-
-    Przechowywanie tylko identyfikatora wymaga jakieś centralnego punktu, który będzie odpowiedzialny za trzymanie aktywnych "sesji". My skorzystamy z <a href="https://jwt.io/">JSON Web Tokens (JWT)</a>.
-  </p>
-  <p><strong>JWT</strong> jest otwartym formatem tokenów, który może zawierać wszystkie potrzebne zakodowane dane.</p>
+  <p>Potrafimy już odczytywać tokeny JWT, ale trzeba by je teraz umieć tworzyć.</p>
+  <p>Użyjemy do tego <code>jsonwebtoken</code>.</p>
 </details>

@@ -38,6 +38,7 @@ class Activities {
   }
 
   async new (req, res) {
+    console.log(req.user)
     const { name, alt } = req.body
     const activity = await this._model.newActivity(name, alt)
 

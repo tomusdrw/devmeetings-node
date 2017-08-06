@@ -1,2 +1,0 @@
-# Instalujemy middleware do obsługi JWT
-$ npm i --save express-jwt
