@@ -1,37 +1,3 @@
 <details>
-  <p>Jak powinno wyglądać dobre REST API?</p>
-  <ul>
-    <li>Proste i przewidywalne! Najlepiej kiedy w ogóle nie wymaga dokumentacji (no suprises).</li>
-    <li>Powinno zwracać dobre błędy (i status code), tak żeby na podstawie błędu było wiadomo co poprawić.</li>
-    <li>Rzeczowniki, a nie czasowniki. <code>URL</code> zawiera <strong>zasób</strong>, a <code>HTTP verbs</code> określa operację.</li>
-    <li>Traktuj developera jak klienta, a API jak produkt.</li>
-    <li>Buduj tak jakbyś miał je wystawić na zewnątrz.</li>
-  </ul>
-  <table>
-    <thead>
-      <tr>
-        <th>Zasób</th>
-        <th><strong>POST</strong> <br> <strong>C</strong>reate</th>
-        <th><strong>GET</strong> <br> <strong>R</strong>ead</th>
-        <th><strong>PUT/PATCH</strong> <br> <strong>U</strong>pdate</th>
-        <th><strong>DELETE</strong> <br> <strong>D</strong>elete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>/activities</strong> <br> kolekcja</td>
-        <td>stwórz nową aktywność</td>
-        <td>wylistuj aktywności</td>
-        <td>Podmień wszystkie aktywności*</td>
-        <td>Usuń wszystkie aktywności*</td>
-      </tr>
-      <tr>
-        <td><strong>/activities/1234</strong> <br> element</td>
-        <td>stwórz z określonym ID*</td>
-        <td>zwróć pojedynczą aktywność</td>
-        <td>uaktualnij pojedynczą aktywność</td>
-        <td>usuń aktywność</td>
-      </tr>
-    </tbody>
-  </table>
+  <p>Generowanie błędów jest dość uciążliwe, skorzystajmy z biblioteki <code>boom</code>.</p>
 </details>

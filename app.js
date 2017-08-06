@@ -3,12 +3,9 @@ const morgan = require('morgan')
 const errorhandler = require('errorhandler')
 const bodyParser = require('body-parser')
 const config = require('config')
+const boom = require('boom')
 
 const app = express()
-
-if (config.get('env') !== 'production') {
-  app.use(errorhandler())
-}
 
 app.use(morgan('dev'))
 app.use(express.static('static'))
@@ -45,12 +42,21 @@ const activities = [
   }
 ]
 
-// 17/ Tworzenie nowej aktywności
 app.post(
   '/v1/api/activities',
   bodyParser.json(),
   (req, res) => {
     const { name, alt } = req.body
+    // 9/ Dodajemy podstawową walidację kompletności danych.
+    if (!name) {
+      throw boom.badRequest('`name` is missing')
+    }
+    if (!alt) {
+      throw boom.badRequest('`alt` is missing')
+    }
+    if (Object.keys(req.body).length > 2) {
+      throw boom.badRequest(`Extra fields given: ${Object.keys(req.body)}`)
+    }
     const id = activities.length + 1
     const timeSpent = 0
     const activity = { id, name, alt, timeSpent }
@@ -63,22 +69,16 @@ app.post(
       .json(activity)
   }
 )
-// 3/ Lista aktywności
 app.get('/v1/api/activities', (req, res) => {
   res.json(activities)
 })
 
-// 16/ Pobieranie pojedynczej aktywności
 app.get('/v1/api/activities/:id', (req, res) => {
   const id = parseInt(req.params.id, 10)
   const activity = activities.find(x => x.id === id)
+  // 3/ Upraszczamy obsługę błędow 404
   if (!activity) {
-    res
-      .status(404)
-      .json({
-        message: 'The activity does not exist.'
-      })
-    return
+    throw boom.notFound('The activity does not exist.')
   }
 
   res
@@ -86,17 +86,11 @@ app.get('/v1/api/activities/:id', (req, res) => {
     .json(activity)
 })
 
-// 17/ Usunięcie aktywności
 app.delete('/v1/api/activities/:id', (req, res) => {
   const id = parseInt(req.params.id, 10)
   const idx = activities.findIndex(x => x.id === id)
   if (!idx) {
-    res
-      .status(404)
-      .json({
-        message: 'The activity does not exist.'
-      })
-    return
+    throw boom.notFound('The activity does not exist.')
   }
 
   activities.splice(idx, 1)
@@ -106,7 +100,6 @@ app.delete('/v1/api/activities/:id', (req, res) => {
     .end()
 })
 
-// 25/ Edycja aktywności (częściowa)
 app.patch(
   '/v1/api/activities/:id',
   bodyParser.json(),
@@ -114,12 +107,7 @@ app.patch(
     const id = parseInt(req.params.id, 10)
     const activity = activities.find(x => x.id === id)
     if (!activity) {
-      res
-        .status(404)
-        .json({
-          message: 'The activity does not exist.'
-        })
-      return
+      throw boom.notFound('The activity does not exist.')
     }
 
     const { name, alt, timeSpent } = req.body
@@ -150,5 +138,27 @@ app.post(
     res.redirect(303, '/')
   }
 )
+
+// 16/ Na samym końcu dodajemy error middleware, w którym zamienimy błędy boom na odpowiedzi.
+app.use((err, req, res, next) => {
+  if (res.headersSent) {
+    return next()
+  }
+
+  if (!err.isBoom) {
+    return next(err)
+  }
+
+  res
+    .status(err.output.statusCode)
+    .json({
+      code: err.output.statusCode,
+      message: err.message
+    })
+})
+
+if (config.get('env') !== 'production') {
+  app.use(errorhandler())
+}
 
 module.exports = app
