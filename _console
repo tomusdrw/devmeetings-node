@@ -1,0 +1,2 @@
+# Dodajemy joi do projektu
+$ npm i --save joi
