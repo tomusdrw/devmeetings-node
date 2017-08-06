@@ -25,9 +25,7 @@ function validateRes (schema) {
 }
 
 function requireAuth () {
-  // 3/ Middleware do authoryzacji będzie teraz wymagał tokena JWT
   return jwt({
-    // Secret używany jest do weryfikacji sygnatury
     secret: config.get('secret')
   })
 }

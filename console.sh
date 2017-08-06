@@ -1,4 +1,5 @@
 $ npm i --save express-jwt
-
-# instalujemy bibliotekę do podpisywania JWT
 $ npm i --save jsonwebtoken
+
+# instalujemy express-jwt-permissions
+$ npm i --save express-jwt-permissions

@@ -9,21 +9,18 @@ module.exports = router
 
 router.use('/v1/api/activities/', activities)
 
-// Tworzymy nowy endpoint na którym będzie można uzyskać token
 router.post('/v1/api/tokens', (req, res) => {
-  // 3/ Będziemy podpisywać obiekt usera
+  // 6/ Do obiektu usera dodajemy uprawnienia
   const user = {
-    username: 'tomusdrw'
+    username: 'tomusdrw',
+    permissions: [
+      'create'
+    ]
   }
-  // Secret wyciągamy z configa
   const secret = config.get('secret')
-  // 8/ Dodajemy opcje, takie jak:
   const options = {
-    // Datę wygaśnięcia tokenu,
-    expiresIn: '30s',
-    // Wystawca tokenu
+    expiresIn: '5m',
     issuer: 'my-app',
-    // i odbiorca tokenu
     audience: 'my-app'
   }
 

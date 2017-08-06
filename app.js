@@ -14,9 +14,11 @@ app.use(express.static('static'))
 
 app.use(routes)
 
-// 7/ Dodajemy middleware do ładnego formatowania błedów
 app.use((err, req, res, next) => {
-  if (err.name === 'UnauthorizedError') {
+  // 2/ Dodajemy obsługę błędów
+  if (err.code === 'permission_denied') {
+    next(boom.forbidden(err.message))
+  } else if (err.name === 'UnauthorizedError') {
     next(boom.unauthorized(err.message))
   } else {
     next(err)

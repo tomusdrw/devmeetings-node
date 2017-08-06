@@ -2,6 +2,7 @@ const Router = require('express').Router
 const bodyParser = require('body-parser')
 const boom = require('boom')
 const celebrate = require('celebrate')
+const guard = require('express-jwt-permissions')()
 
 const model = require('../../models/activities')
 const { validateRes, requireAuth } = require('../utils')
@@ -15,6 +16,7 @@ class Activities {
     this.router.route('/')
       .post(
         requireAuth(),
+        guard.check('create'),
         bodyParser.json(),
         celebrate({ body: schemas.activity }),
         (req, res, next) => this.new(req, res).catch(next)
@@ -28,11 +30,13 @@ class Activities {
       .get(validateRes(schemas.activity), (req, res, next) => this.get(req, res).catch(next))
       .patch(
         requireAuth(),
+        guard.check('edit'),
         bodyParser.json(),
         (req, res, next) => this.update(req, res).catch(next)
       )
       .delete(
         requireAuth(),
+        guard.check('delete'),
         (req, res, next) => this.delete(req, res).catch(next)
       )
   }
