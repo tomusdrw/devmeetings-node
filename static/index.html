@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Activity Tracker</title>
+    <link rel="stylesheet" href="https://xpla.org/cdn/normalize/7.0.0/normalize.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <h1>Your activities</h1>
+
+    <div class="activities"></div>
+
+    <form action="/addActivity" method="POST">
+      <h3>Add activity</h3>
+      <label>
+        Activity name
+        <input type="text" name="name">
+      </label>
+      <label>
+        Image id
+        <input type="number" name="id">
+      </label>
+
+      <button>Add</button>
+    </form>
+  </body>
+</html>

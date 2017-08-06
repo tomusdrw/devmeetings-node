@@ -1,0 +1,29 @@
+<details>
+  <p>Aktualnie nowy produkt dodawany jest przez formularz. Zamiast tego zbudujmy porządne RESTowe API. Jak to zrobić?</p>
+  <p>REST = <strong>Re</strong>presentational <strong>S</strong>tate <strong>T</strong>ransfer.</p>
+  <p>
+    Fundamenty:
+    <ul>
+      <li><strong>Client-Server architecture</strong> - podział</li>
+      <li><strong>Statelessness</strong> - brak "kontekstu" requestu</li>
+      <li><strong>Cacheability</strong> - serwer może powiedzieć co można zcachować</li>
+      <li><strong>Layered system</strong> - load balancing, proxying</li>
+      <li><strong>Uniform interface</strong>
+        <ul>
+          <li>
+            <strong>Resource identification in requests</strong> - zasoby identyfikowane przez URI są rozdzielone od reprezentacji
+          </li>
+          <li>
+            <strong>Resource manipulation through representation</strong> - to co klient dostaje wystarcza do modyfikacji lub usunięcia zasobu (brak dodatkowych założeń)
+          </li>
+          <li>
+            <strong>Self-descriptive messages</strong> - każda wiadomość ma wystarczająco informacji do tego aby klient mógł ją przetworzyć. Klient nie powinien "spodziewać się" jakiegoś typu.
+          </li>
+          <li>
+            <strong>Hypermedia as the engine of application state (HATEOAS)</strong> - klient RESTowy powinien mieć możliwość automatycznie odkryć API wchodząc tylko na główny endpoint (strona główna). Odpowiedzi powinny zawierać linki do innych dostępnych zasobów.
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+</details>
