@@ -1,12 +1,5 @@
 <details>
-  <p>Podczas deployowania aplikacji nodeowych warto wystawić je za reverse proxy (np. nginx).</p>
-  <p>Dzięki temu nie będziemy musieli działać z uprawnieniami roota i będziemy mogli wykorzystać kilka ważnych optymalizacji.</p>
-  <ul>
-    <li>Serwowanie statycznych plików.</li>
-    <li>Gzip</li>
-    <li>Cachowanie responsów</li>
-    <li>Load balancing</li>
-    <li>Fallback</li>
-    <li>SSL (i HTTP2)</li>
-  </ul>
+  <p>Jeżeli będziemy chcieli dużo logować w naszej aplikacji, najlepiej nie korzystać z synchronicznego <code>console.log</code></p>
+  <p>Istnieją dwie bardzo dobre biblioteki do logowania: <code>winston</code> i <code>bunyan</code>.</p>
+  <p>Dzięki nim możemy wpiąć wiele różnych transportów, i logować dowolne dane w czytelnym formacie.</p>
 </details>

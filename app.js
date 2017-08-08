@@ -7,6 +7,16 @@ const express = require('express')
 const helmet = require('helmet')
 const morgan = require('morgan')
 const proxy = require('express-http-proxy')
+const winston = require('winston');
+
+// 7/ Konfigurujemy logger dodając zapisywanie do pliku
+winston.configure({
+  transports: [
+    new (winston.transports.File)({
+      filename: 'logs.log'
+    })
+  ]
+})
 
 const routes = require('./routes')
 const protected = require('./protected')
@@ -15,6 +25,11 @@ const app = express()
 
 app.set('view engine', 'pug')
 
+// 3/ Tworzymy middleware, który loguje requesty.
+app.use((req, res, next) => {
+  winston.info('New request: ', req.url)
+  next()
+})
 app.use(morgan('dev'))
 
 app.use(corser.create({
