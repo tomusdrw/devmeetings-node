@@ -1,0 +1,39 @@
+{
+  "name": "my-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "node index",
+  "scripts": {
+    "start": "nodemon --delay 1 ./index.js",
+    "lint": "standard",
+    "test": "mocha --recursive routes index.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "boom": "^5.2.0",
+    "celebrate": "^4.0.1",
+    "config": "^1.26.1",
+    "cookie-parser": "^1.4.3",
+    "corser": "^2.0.1",
+    "csurf": "^1.9.0",
+    "errorhandler": "^1.5.0",
+    "express": "^4.15.3",
+    "express-http-proxy": "^1.0.6",
+    "express-jwt": "^5.3.0",
+    "express-jwt-permissions": "^1.0.0",
+    "helmet": "^3.8.1",
+    "joi": "^10.6.0",
+    "morgan": "^1.8.2",
+    "pug": "^2.0.0-rc.3"
+  },
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0",
+    "nodemon": "^1.11.0",
+    "standard": "^10.0.2",
+    "supertest": "^3.0.0"
+  }
+}
