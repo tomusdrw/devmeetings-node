@@ -1,26 +1,50 @@
-const Koa = require('koa')
-const Router = require('koa-router')
-const app = new Koa()
+const Good = require('good')
+const Hapi = require('hapi')
+const Inert = require('inert')
+const Lout = require('lout')
+const Vision = require('vision')
 
-// 6/ Koa dalej oparty jest o middlewares
-// -- ale kod możemy pisać w nim w pełni "synchronicznie"
-app.use(async (ctx, next) => {
-  console.log('Before request: ', ctx.url)
-  await next()
-  console.log('After request:', ctx.url)
-})
+const Routes = require('./routes');
 
-// 6/ Podobnie jak w express możemy stworzyć router.
-const router = new Router()
-router.get('/', async (ctx) => {
-  ctx.body = 'Hello from main'
-})
-app.use(router.routes())
-app.use(router.allowedMethods())
+const server = new Hapi.Server();
+server.connection({
+  port: process.env.PORT || 3000
+});
 
-// 3/ Routy końcowe nie wywołują next
-app.use(async ctx => {
-  ctx.body = 'Hello World'
-})
+server.register([
+  Inert,
+  Vision,
+  {
+    register: Lout,
+    options: {
+      endpoint: '/docs'
+    }
+  },
+  {
+    register: Good,
+    options: {
+      reporters: {
+        console: [{
+          module: 'good-console',
+          args: [{
+            response: '*',
+            log: '*'
+          }]
+        }, 'stdout']
+      }
+    }
+  }
+], (err) => {
+  if (err) {
+    throw err; // something bad happened loading the plugin
+  }
 
-app.listen(process.env.PORT || 3000)
+  server.route(Routes);
+
+  server.start((err) => {
+    if (err) {
+      console.log(err)
+    }
+    server.log('info', 'Server running at: ' + server.info.uri);
+  });
+});

@@ -4,10 +4,14 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "express-http-proxy": "^1.0.6",
-    "koa": "^2.3.0",
-    "koa-router": "^7.2.1",
-    "winston": "^2.3.1"
+    "boom": "^5.2.0",
+    "good": "^7.2.0",
+    "good-console": "^6.4.0",
+    "hapi": "^16.5.2",
+    "inert": "^4.2.1",
+    "joi": "^10.6.0",
+    "lout": "^10.0.2",
+    "vision": "^4.1.1"
   },
   "devDependencies": {},
   "scripts": {
