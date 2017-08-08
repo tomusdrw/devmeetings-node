@@ -1,0 +1,27 @@
+{
+  "name": "koa-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express-http-proxy": "^1.0.6",
+    "koa": "^2.3.0",
+    "koa-router": "^7.2.1",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomusdrw/devmeetings-node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tomusdrw/devmeetings-node/issues"
+  },
+  "homepage": "https://github.com/tomusdrw/devmeetings-node#readme"
+}

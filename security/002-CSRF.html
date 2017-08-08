@@ -1,0 +1,63 @@
+
+    <!DOCTYPE html>
+    <html xp-run-server-url="https://xpla.org" xp-presence-url="wss://presence.xpla.org">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>CSRF</title>
+        <script src="https://xpla.org/static/js/slide_loader.3.0.0.js"></script>
+      </head>
+      <body class="xp-slide">
+        <div class="xp-row with-comments">
+          
+    
+    <div class="xp-column" style="width: 65%">
+      <xp-editor active="app.js" tree>
+        	<script id="app.js" highlight="7-47" type="application/octetstream" src="002/app.js"></script>
+	<script id="console.sh" highlight="1-8" type="application/octetstream" src="002/console.sh"></script>
+	<script id="package-lock.json" highlight="25-45,73-93,182-192,341-351,360-374,396-409,432-456,466-488,596-617,641-655,667-710,738-748,848-858,1561-1567,1678-1684,1690-1695,1877-1883,1906-1927,2024-2034,2045-2050,2106-2116,2202-2216,2242-2247,2255-2265,2444-2454,2681-2687,2848-2854,2982-2995,3008-3154,3321-3327,3346-3351,3371-3384,3388-3398,3509-3522,3738-3748,3766-3776,3801-3837,3895-3926,3971-3987" type="application/octetstream" src="002/package-lock.json"></script>
+	<script id="package.json" highlight="16-31" type="application/octetstream" src="002/package.json"></script>
+	<script id="protected.js" highlight="1-32" type="application/octetstream" src="002/protected.js"></script>
+	<script id="views/form.pug" highlight="1-8" type="application/octetstream" src="002/views/form.pug"></script>
+	<script id="index.js" type="application/octetstream" src="001/index.js"></script>
+	<script id="index.test.js" type="application/octetstream" src="001/index.test.js"></script>
+	<script id="config/default.json" type="application/octetstream" src="001/config/default.json"></script>
+	<script id="config/production.json" type="application/octetstream" src="001/config/production.json"></script>
+	<script id="models/activities/activities.js" type="application/octetstream" src="001/models/activities/activities.js"></script>
+	<script id="models/activities/index.js" type="application/octetstream" src="001/models/activities/index.js"></script>
+	<script id="routes/index.js" type="application/octetstream" src="001/routes/index.js"></script>
+	<script id="routes/utils.js" type="application/octetstream" src="001/routes/utils.js"></script>
+	<script id="routes/activities/activities.js" type="application/octetstream" src="001/routes/activities/activities.js"></script>
+	<script id="routes/activities/activities.test.js" type="application/octetstream" src="001/routes/activities/activities.test.js"></script>
+	<script id="routes/activities/index.js" type="application/octetstream" src="001/routes/activities/index.js"></script>
+	<script id="schemas/index.js" type="application/octetstream" src="001/schemas/index.js"></script>
+	<script id="static/index.html" type="application/octetstream" src="001/static/index.html"></script>
+	<script id="static/main.js" type="application/octetstream" src="001/static/main.js"></script>
+	<script id="static/styles.css" type="application/octetstream" src="001/static/styles.css"></script>
+      </xp-editor>
+    </div>
+  
+    <div class="xp-resize-column"></div>
+    
+    <div class="xp-column" style="width: 35%">
+      <xp-preview server runner="express"></xp-preview>
+    </div>
+  
+  
+        </div>
+        <div class="xp-resize-row"></div>
+        <div class="xp-row comments">
+          <xp-annotations>
+            <header><h1>Cross-Site Request Forgery</h1></header>
+            <details>
+  <p>Zagrożeniem w przypadku standardowych formularzy (nie-jsonowe requesty) jest Cross-Site Request Forgery (CSRF).</p>
+  <p>Atak polega na tym, że formularz/request wysyłany jest z innej domeny niż nasza (czyli użytkownik był na innej stronie).</p>
+  <p>Ale przeglądarka doklei wszystkie wymagane Cookiesy do tego requestu (czyli np. identyfikator sesji).</p>
+  <p>Atakujący jest w stanie wykonać dowolne operacje jako zalogowany użytkownik.</p>
+</details>
+
+          </xp-annotations>
+        </div>
+      </body>
+    </html>
+  

@@ -1,0 +1,43 @@
+
+    <!DOCTYPE html>
+    <html xp-run-server-url="https://xpla.org" xp-presence-url="wss://presence.xpla.org">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>readFile</title>
+        <script src="https://xpla.org/static/js/slide_loader.3.0.0.js"></script>
+      </head>
+      <body class="xp-slide">
+        <div class="xp-row with-comments">
+          
+    
+    <div class="xp-column">
+      <xp-editor active="console.sh" >
+        	<script id="console.sh" highlight="1-9" type="application/octetstream" src="001/console.sh"></script>
+	<script id="file" type="application/octetstream" src="001/file"></script>
+	<script id="index.js" highlight="1-47" type="application/octetstream" src="001/index.js"></script>
+      </xp-editor>
+    </div>
+  
+    <div class="xp-resize-column"></div>
+    
+    <div class="xp-column">
+      <xp-preview  runner="html"></xp-preview>
+    </div>
+  
+  
+        </div>
+        <div class="xp-resize-row"></div>
+        <div class="xp-row comments">
+          <xp-annotations>
+            <header><h1>Performance czytania z pliku</h1></header>
+            <details>
+  <p>Przeanalizujmy wydajność serwera w node.js.</p>
+  <p>Przetestujemy zachowanie 3 różnych metod czytania z pliku.</p>
+</details>
+
+          </xp-annotations>
+        </div>
+      </body>
+    </html>
+  

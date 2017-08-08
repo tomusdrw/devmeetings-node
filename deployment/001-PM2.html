@@ -1,0 +1,68 @@
+
+    <!DOCTYPE html>
+    <html xp-run-server-url="https://xpla.org" xp-presence-url="wss://presence.xpla.org">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>PM2</title>
+        <script src="https://xpla.org/static/js/slide_loader.3.0.0.js"></script>
+      </head>
+      <body class="xp-slide">
+        <div class="xp-row with-comments">
+          
+    
+    <div class="xp-column" style="width: 65%">
+      <xp-editor active="app.js" tree>
+        	<script id="app.js" highlight="1-85" type="application/octetstream" src="001/app.js"></script>
+	<script id="config/default.json" highlight="1-5" type="application/octetstream" src="001/config/default.json"></script>
+	<script id="config/production.json" highlight="1-3" type="application/octetstream" src="001/config/production.json"></script>
+	<script id="console.sh" highlight="1-12" type="application/octetstream" src="001/console.sh"></script>
+	<script id="index.js" highlight="1-10" type="application/octetstream" src="001/index.js"></script>
+	<script id="index.test.js" highlight="1-25" type="application/octetstream" src="001/index.test.js"></script>
+	<script id="models/activities/activities.js" highlight="1-84" type="application/octetstream" src="001/models/activities/activities.js"></script>
+	<script id="models/activities/index.js" highlight="1" type="application/octetstream" src="001/models/activities/index.js"></script>
+	<script id="package-lock.json" highlight="1-4001" type="application/octetstream" src="001/package-lock.json"></script>
+	<script id="package.json" highlight="1-39" type="application/octetstream" src="001/package.json"></script>
+	<script id="protected.js" highlight="1-27" type="application/octetstream" src="001/protected.js"></script>
+	<script id="routes/activities/activities.js" highlight="1-122" type="application/octetstream" src="001/routes/activities/activities.js"></script>
+	<script id="routes/activities/activities.test.js" highlight="1-40" type="application/octetstream" src="001/routes/activities/activities.test.js"></script>
+	<script id="routes/activities/index.js" highlight="1" type="application/octetstream" src="001/routes/activities/index.js"></script>
+	<script id="routes/index.js" highlight="1-42" type="application/octetstream" src="001/routes/index.js"></script>
+	<script id="routes/utils.js" highlight="1-33" type="application/octetstream" src="001/routes/utils.js"></script>
+	<script id="schemas/index.js" highlight="1-18" type="application/octetstream" src="001/schemas/index.js"></script>
+	<script id="static/index.html" highlight="1-30" type="application/octetstream" src="001/static/index.html"></script>
+	<script id="static/main.js" highlight="1-99" type="application/octetstream" src="001/static/main.js"></script>
+	<script id="static/styles.css" highlight="1-59" type="application/octetstream" src="001/static/styles.css"></script>
+	<script id="views/form.pug" highlight="1-8" type="application/octetstream" src="001/views/form.pug"></script>
+      </xp-editor>
+    </div>
+  
+    <div class="xp-resize-column"></div>
+    
+    <div class="xp-column" style="width: 35%">
+      <xp-preview server runner="express"></xp-preview>
+    </div>
+  
+  
+        </div>
+        <div class="xp-resize-row"></div>
+        <div class="xp-row comments">
+          <xp-annotations>
+            <header><h1>PM2</h1></header>
+            <details>
+  <p>Zobaczmy jak wystawiać aplikacje w nodejs na produkcji.</p>
+  <p>Użyjemy do tego świetnego narzędzia <code>pm2</code></p>
+  <ul>
+    <li>Save & Resurrect</li>
+    <li>pm2.json</li>
+    <li>Cluster mode</li>
+    <li>Logs (+ logs rotate)</li>
+    <li>0-downtime reload</li>
+  </ul>
+</details>
+
+          </xp-annotations>
+        </div>
+      </body>
+    </html>
+  

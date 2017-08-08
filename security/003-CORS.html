@@ -1,0 +1,63 @@
+
+    <!DOCTYPE html>
+    <html xp-run-server-url="https://xpla.org" xp-presence-url="wss://presence.xpla.org">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>CORS</title>
+        <script src="https://xpla.org/static/js/slide_loader.3.0.0.js"></script>
+      </head>
+      <body class="xp-slide">
+        <div class="xp-row with-comments">
+          
+    
+    <div class="xp-column" style="width: 65%">
+      <xp-editor active="app.js" tree>
+        	<script id="app.js" highlight="1-7,12-27" type="application/octetstream" src="003/app.js"></script>
+	<script id="console.sh" highlight="1-7" type="application/octetstream" src="003/console.sh"></script>
+	<script id="package-lock.json" highlight="667-677" type="application/octetstream" src="003/package-lock.json"></script>
+	<script id="package.json" highlight="17-23" type="application/octetstream" src="003/package.json"></script>
+	<script id="index.js" type="application/octetstream" src="001/index.js"></script>
+	<script id="index.test.js" type="application/octetstream" src="001/index.test.js"></script>
+	<script id="protected.js" type="application/octetstream" src="002/protected.js"></script>
+	<script id="config/default.json" type="application/octetstream" src="001/config/default.json"></script>
+	<script id="config/production.json" type="application/octetstream" src="001/config/production.json"></script>
+	<script id="models/activities/activities.js" type="application/octetstream" src="001/models/activities/activities.js"></script>
+	<script id="models/activities/index.js" type="application/octetstream" src="001/models/activities/index.js"></script>
+	<script id="routes/index.js" type="application/octetstream" src="001/routes/index.js"></script>
+	<script id="routes/utils.js" type="application/octetstream" src="001/routes/utils.js"></script>
+	<script id="routes/activities/activities.js" type="application/octetstream" src="001/routes/activities/activities.js"></script>
+	<script id="routes/activities/activities.test.js" type="application/octetstream" src="001/routes/activities/activities.test.js"></script>
+	<script id="routes/activities/index.js" type="application/octetstream" src="001/routes/activities/index.js"></script>
+	<script id="schemas/index.js" type="application/octetstream" src="001/schemas/index.js"></script>
+	<script id="static/index.html" type="application/octetstream" src="001/static/index.html"></script>
+	<script id="static/main.js" type="application/octetstream" src="001/static/main.js"></script>
+	<script id="static/styles.css" type="application/octetstream" src="001/static/styles.css"></script>
+	<script id="views/form.pug" type="application/octetstream" src="002/views/form.pug"></script>
+      </xp-editor>
+    </div>
+  
+    <div class="xp-resize-column"></div>
+    
+    <div class="xp-column" style="width: 35%">
+      <xp-preview server runner="express"></xp-preview>
+    </div>
+  
+  
+        </div>
+        <div class="xp-resize-row"></div>
+        <div class="xp-row comments">
+          <xp-annotations>
+            <header><h1>Cross-Origin Resources Sharing</h1></header>
+            <details>
+  <p>Nasze RESTowe API jest bezpieczne jeżeli wymagamy <code>Content-Type: application/json</code></p>
+  <p>Przeglądarki wykorzystują tutaj inny mechanizm nazywany Same-Origin Policy (<code>SOP</code>).</p>
+  <p>A co jeżeli musimy robić requesty do API na innej domenie? Wtedy musimy skorzystać z <code>CORS</code>Cross-Origin Resource Sharing.</p>
+  <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Preflighted_requests">Czytaj więcej.</a></p>
+</details>
+
+          </xp-annotations>
+        </div>
+      </body>
+    </html>
+  
