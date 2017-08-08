@@ -40,6 +40,19 @@ http.createServer((req, res) => {
     return
   }
 
+  if (req.url === '/async2') {
+    fs.readFile(file, (err, data) => {
+      if (err) {
+        res.writeHead(500)
+        res.end(err)
+        return
+      }
+
+      res.end(data)
+    })
+    return
+  }
+
   res.writeHead(404, {
     'Content-Type': 'text/html'
   })
