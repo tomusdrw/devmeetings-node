@@ -1,0 +1,70 @@
+{
+  "xpla.version": 1,
+  "name": "Node & Express",
+  "date": "7-9 August 2017",
+  "link": "https://bit.ly/node-intive",
+  "author": {
+    "name": "Tomasz Drwięga",
+    "link": "@tomusdrw"
+  },
+  "runner": "express",
+  "branches": [
+    {
+      "name": "intro",
+      "title": "Przypomnienie z ES2015"
+    },
+    {
+      "name": "http",
+      "title": "Pierwszy serwer w node.js"
+    },
+    {
+      "name": "connect",
+      "title": "Mikro-framework connect"
+    },
+    {
+      "name": "devenv",
+      "title": "Srodowisko developerskie"
+    },
+    {
+      "name": "express",
+      "title": "Express.js"
+    },
+    {
+      "name": "restapi",
+      "title": "Budowanie REST API"
+    },
+    {
+      "name": "router",
+      "title": "Express Router i organizacja kodu"
+    },
+    {
+      "name": "validation",
+      "title": "Walidacja i Sanityzacja"
+    },
+    {
+      "name": "auth",
+      "title": "Autentykacja i Autoryzacja"
+    },
+    {
+      "name": "security",
+      "title": "Security"
+    },
+    {
+      "name": "perf",
+      "title": "Performance i Debugging"
+    },
+    {
+      "name": "middleware",
+      "title": "Node jako middleware"
+    },
+    {
+      "name": "deployment",
+      "title": "Deployment i Produkcja"
+    },
+    {
+      "name": "alternatives",
+      "title": "Alternatywne frameworki"
+    }
+  ]
+}
+      
