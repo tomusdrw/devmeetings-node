@@ -1,6 +1,7 @@
 const boom = require('boom')
 const celebrate = require('celebrate')
 const config = require('config')
+const corser = require('corser')
 const errorhandler = require('errorhandler')
 const express = require('express')
 const helmet = require('helmet')
@@ -11,10 +12,15 @@ const protected = require('./protected')
 
 const app = express()
 
-// Ustawiamy silnik renderowania templatów
 app.set('view engine', 'pug')
 
 app.use(morgan('dev'))
+
+// 4/ Corser obsłuży nam preflight requesty i doklei nagłówki.
+app.use(corser.create({
+  // Zezwalamy na requesty ze strony devmeetings.pl
+  origins: ['http://devmeetings.pl']
+}))
 
 app.use(helmet({
   contentSecurityPolicy: {

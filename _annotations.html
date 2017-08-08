@@ -1,6 +1,6 @@
 <details>
-  <p>Zagrożeniem w przypadku standardowych formularzy (nie-jsonowe requesty) jest Cross-Site Request Forgery (CSRF).</p>
-  <p>Atak polega na tym, że formularz/request wysyłany jest z innej domeny niż nasza (czyli użytkownik był na innej stronie).</p>
-  <p>Ale przeglądarka doklei wszystkie wymagane Cookiesy do tego requestu (czyli np. identyfikator sesji).</p>
-  <p>Atakujący jest w stanie wykonać dowolne operacje jako zalogowany użytkownik.</p>
+  <p>Nasze RESTowe API jest bezpieczne jeżeli wymagamy <code>Content-Type: application/json</code></p>
+  <p>Przeglądarki wykorzystują tutaj inny mechanizm nazywany Same-Origin Policy (<code>SOP</code>).</p>
+  <p>A co jeżeli musimy robić requesty do API na innej domenie? Wtedy musimy skorzystać z <code>CORS</code>Cross-Origin Resource Sharing.</p>
+  <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Preflighted_requests">Czytaj więcej.</a></p>
 </details>
