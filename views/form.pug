@@ -1,0 +1,8 @@
+html
+  head
+    title Vulnerable site
+  body
+    form(action="", method="POST")
+      input(type="hidden", name="_csrf", value=csrfToken)
+      input(type="text", name="permissions")
+      button Modify Permissions
